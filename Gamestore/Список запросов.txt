@@ -1,0 +1,22 @@
+from task1.models import Buyer, Game
+
+# Создание покупателей
+buyer1 = Buyer.objects.create(name='John Doe', balance=100.00, age=25)
+buyer2 = Buyer.objects.create(name='Jane Smith', balance=150.00, age=17)
+buyer3 = Buyer.objects.create(name='Alice Johnson', balance=200.00, age=30)
+
+# Создание игр
+game1 = Game.objects.create(title='Epic Adventure', cost=60.00, size=15.5, description='An epic adventure game', age_limited=True)
+game2 = Game.objects.create(title='Puzzle Quest', cost=40.00, size=3.2, description='A challenging puzzle game', age_limited=False)
+game3 = Game.objects.create(title='Space Odyssey', cost=80.00, size=20.0, description='Explore the universe in this space odyssey', age_limited=True)
+
+# Связывание игр с покупателями
+game1.buyers.set([buyer3])
+game2.buyers.set([buyer1, buyer2, buyer3])
+game3.buyers.set([buyer1, buyer3])
+
+# Проверка записей
+print(Buyer.objects.all())
+print(Game.objects.all())
+for game in Game.objects.all():
+    print(f"Game: {game.title}, Buyers: {[buyer.name for buyer in game.buyers.all()]}")
